@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexyna AI - L'Intelligence Artificielle au Service de Votre Transport</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue-sky: #87CEEB;
+            --blue-medium: #4A90E2;
+            --blue-dark: #1E3A8A;
+            --blue-night: #0F172A;
+            --white: #FFFFFF;
+            --gray-light: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--blue-night);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #4A90E2, #1E3A8A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--blue-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        nav a:hover {
+            color: var(--blue-medium);
+            background: rgba(74, 144, 226, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 120px 20px 80px;
+            background: linear-gradient(135deg, #87CEEB 0%, #4A90E2 50%, #1E3A8A 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 2px, transparent 2px),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3) 2px, transparent 2px),
+                radial-gradient(circle at 60% 20%, rgba(255,255,255,0.2) 1px, transparent 1px);
+            background-size: 200px 200px, 300px 300px, 150px 150px;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--blue-dark);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #4A90E2, #1E3A8A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(30, 58, 138, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #87CEEB, #4A90E2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: translateX(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--blue-dark);
+        }
+
+        .card p {
+            color: var(--blue-night);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4A90E2, #1E3A8A);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .step h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--blue-dark);
+        }
+
+        /* Service Icons */
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(90deg, #87CEEB, #4A90E2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--gray-light);
+            border-radius: 30px;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--blue-dark);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--blue-night);
+            color: var(--white);
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #87CEEB, #4A90E2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            nav {
+                gap: 1rem;
+            }
+            
+            nav a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero {
+                padding: 100px 15px 60px;
+            }
+            
+            section {
+                padding: 60px 15px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">NEXYNA AI</div>
+        <nav>
+            <a href="#procede">Procédé</a>
+            <a href="#services">Services</a>
+            <a href="#projets">Projets</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>L'Intelligence Artificielle au Service de Votre Transport</h1>
+            <p>Révolutionnez vos opérations logistiques avec nos solutions IA sur-mesure. Automatisation intelligente, suivi prédictif et optimisation continue pour propulser votre business vers l'avenir.</p>
+            <a href="#services" class="btn btn-primary">Découvrir l'IA</a>
+            <a href="#contact" class="btn btn-secondary">Consultation Gratuite</a>
+        </div>
+    </section>
+
+    <section id="procede">
+        <h2>Notre Procédé Expert</h2>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Analyse & Diagnostic</h3>
+                <p>Audit complet de vos processus pour identifier les opportunités d'automatisation et estimer le ROI potentiel.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Conception & Stratégie</h3>
+                <p>Design de solutions IA personnalisées adaptées à vos enjeux métier et contraintes techniques spécifiques.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Développement & Tests</h3>
+                <p>Création et déploiement de vos outils IA avec formation complète de vos équipes pour l'autonomie.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">04</div>
+                <h3>Optimisation Continue</h3>
+                <p>Monitoring performance, analytics avancés et amélioration continue pour maximiser votre retour sur investissement.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Nos Solutions IA de Pointe</h2>
+        <ul class="cards-grid">
+            <li class="card">
+                <div class="service-icon">🤖</div>
+                <h3>Agents IA Conversationnels</h3>
+                <p>Automatisez 80% de votre support client avec nos chatbots intelligents sur WhatsApp, Messenger et web. Disponibilité 24/7 avec compréhension contextuelle avancée.</p>
+            </li>
+            <li class="card">
+                <div class="service-icon">📦</div>
+                <h3>Suivi Intelligent de Colis</h3>
+                <p>Système de tracking prédictif avec alertes automatiques, notifications proactives et gestion d'incidents en temps réel pour une transparence totale.</p>
+            </li>
+            <li class="card">
+                <div class="service-icon">🗺️</div>
+                <h3>Optimisation de Routes IA</h3>
+                <p>Algorithmes d'optimisation avancés intégrés à Google Maps pour réduire les coûts, minimiser les délais et maximiser l'efficacité de vos tournées.</p>
+            </li>
+            <li class="card">
+                <div class="service-icon">📊</div>
+                <h3>Analytics Prédictifs</h3>
+                <p>Tableaux de bord intelligents avec analyses prédictives, KPIs en temps réel et recommandations automatiques pour optimiser vos décisions.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section id="projets">
+        <h2>Nos Réalisations Clients</h2>
+        <ul class="cards-grid">
+            <li class="card">
+                <h3>🚛 MAD Transport - Agent IA</h3>
+                <p>Automatisation complète du dispatch avec géolocalisation intelligente des chauffeurs. Réduction de 60% du temps de traitement et amélioration de 40% de la satisfaction client.</p>
+            </li>
+            <li class="card">
+                <h3>📈 LogiFlow - Optimisation Routes</h3>
+                <p>IA prédictive pour optimiser les tournées de livraison. Économies de 25% sur les coûts carburant et réduction de 30% des retards de livraison.</p>
+            </li>
+            <li class="card">
+                <h3>🎓 TransportCorp - Formation IA</h3>
+                <p>Programme de formation personnalisé pour l'adoption de l'IA en logistique. 95% des équipes autonomes en 3 mois avec ROI de 300% la première année.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Transformez Votre Business Maintenant</h2>
+        <p>Rejoignez plus de 50+ entreprises qui révolutionnent leur logistique avec Nexyna AI</p>
+        
+        <div class="contact-info">
+            <div class="contact-card">
+                <h3>📧 Email Direct</h3>
+                <p><strong>contact@nexyna.ai</strong></p>
+                <p>Réponse garantie sous 2h</p>
+            </div>
+            <div class="contact-card">
+                <h3>💬 WhatsApp Pro</h3>
+                <p><strong>+33 7 64 21 22 27</strong></p>
+                <p>Consultation gratuite 30 min</p>
+            </div>
+            <div class="contact-card">
+                <h3>🎯 Consultation Offerte</h3>
+                <p><strong>Audit gratuit de vos processus</strong></p>
+                <p>ROI estimé en 24h</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">NEXYNA AI</div>
+            <p>&copy; 2025 Nexyna AI - L'Intelligence Artificielle au Service du Transport</p>
+            <p>Automatisation • Innovation • Performance</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation lisse
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Effet navbar au scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Animation d'apparition
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observer les éléments
+        document.querySelectorAll('.card, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
